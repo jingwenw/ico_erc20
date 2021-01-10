@@ -1,0 +1,61 @@
+# NPM Coin ICO based on openzepplin 2.5.1
+
+Features:
+   1. Based on ERC20 token and openzepplin 2.5.1 crowdsale
+   2. Staged (preICO and ICO), Refunable, Timed crowdsale
+   3. The rate would be half in the ICO stage of the one during preICO.
+
+   
+Prequisite:
+   1. truffle installed (sudo npm install truffle)
+   james@mail:~/workspace/ico_wjw$ truffle version
+   Truffle v5.1.58 (core: 5.1.58)
+   Solidity v0.5.16 (solc-js)
+   Node v10.19.0
+   Web3.js v1.2.9
+   james@mail:~/workspace/ico_wjw
+
+   2. ganache-cli installed (sudo npm install -g ganache-cli, and will copy the MNEMONIC text into .env as the sample for public test network) 
+   3. signup on infura.io and get api key (will be put your .env file) for public test network.
+
+Local Build/Migrate/Test Setup:
+   1. git clone this reposit
+   2. goto the dir cloned
+   3. truffle init - then delete truffle-config.js, using truffle.js instead
+   4. npm install (might need to be followed by npm audit fix)
+
+   Now the private ganache network environment is ready.
+
+   For public test network, kovan or ropsten, please do the followings:
+   - copy .env_sample to .env and update it with your infura_api_key and your wallet MNEMONIC string
+   - copy migratiion/3_deploy_crowdsale.js.kovan.network to migratiion/3_deploy_crowdsale.js
+
+Testing steps for the private network:
+   1. start ganache-cli from different shell window
+
+   From the dir of the repos:
+   2. truffle compile
+   3. truffle migrate 
+   4. truffle test
+
+Known Issues:
+- migration async seems not working well - DappTokenCrowdsale could not finished before writing artifacts
+
+- It seems rate is not changeable in the Crowdsale contract. To-be-investigate
+  Jan 8, 2021: fixed by rewrite rate() to return a new local variable.
+
+- It seems token transferOwnership inside the crowdsale does not work - because it is not the owner yet? To-be-investigate
+  Jan 8, 2021: fixed in code, along with unpause();
+
+- BigNumber does not work in test with truffle 5.x - using BN instead
+
+- test/helper/latestTime.js () does not work well
+  Jan 8, 2021: fxied: should use await
+
+- Error: "SyntaxError: Unexpected token export": export default function ether(n) 
+  Jan 8, 2021: create the file.babelrc with the following:
+   {
+     "presets": ["env"]
+     }
+
+- token.balanceOf(investor1) return 0 after crowdsale.buyToken(investor1) successfully fulfilled ???

@@ -1,0 +1,16 @@
+# ignore the local .env files including the keys
+.env
+.env.ganache
+
+# ignore any temp files
+**/*~
+**/#*
+
+# ignore the npm lib
+node_modules/*
+
+# ignore the build dir
+build/*
+
+# ignore the logs
+logs/*
