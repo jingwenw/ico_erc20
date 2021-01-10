@@ -15,9 +15,11 @@ module.exports = async function(callback) {
     const npmRate = await npmCrowdsale.rate();
     const npmGoal = await npmCrowdsale.goal();
     const npmCap = await npmCrowdsale.cap();
+    const npmWallet = await npmCrowdsale.wallet();
     
     console.log("Crowdsale initial rate: ", web3.utils.toBN(npmRate).toString());  
     console.log("Crowdsale goal (unit: eth): ", web3.utils.toBN(npmGoal).div(base).toString());  
-    console.log("Crowdsale cap (unit: eth): ", web3.utils.toBN(npmCap).div(base).toString());  
+    console.log("Crowdsale cap (unit: eth): ", web3.utils.toBN(npmCap).div(base).toString());
+    console.log("Crowsale wallet: ", npmWallet);
 
 }

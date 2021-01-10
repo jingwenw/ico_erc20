@@ -23,15 +23,15 @@ module.exports =  function(deployer, network, accounts) {
   const latestTime = (new Date).getTime();
 
   const _rate           = 500;
-    const _wallet       = "0x0A6b91809587D581860e22153Ff2871f99E4F4fe"; // TODO: Replace me
+    const _wallet       = accounts[0]; // TODO: Replace me
 //  const _token          = deployedToken.address;
-    const _openingTime    = latestTime + duration.minutes(10);
+    const _openingTime    = latestTime + duration.weeks(1);
   const _closingTime    = _openingTime + duration.weeks(26);
   const _cap            = ether(100);
   const _goal           = ether(50);
-  const _foundersFund   = "0xCFfa4620ff70b641b18a89526D1149b0371C0757"; // TODO: Replace me
-  const _foundationFund = "0xb0F7BB89a2f7DcE2b5F5A2225b0bEdB396d4cA19"; // TODO: Replace me
-  const _partnersFund   = "0x3aE6541Ce46E05b386Bd7c98B4a938a4A5865665"; // TODO: Replace me
+  const _foundersFund   = accounts[1]; // TODO: Replace me
+  const _foundationFund = accounts[2]; // TODO: Replace me
+  const _partnersFund   = accounts[3]; // TODO: Replace me
   const _releaseTime    = _closingTime + duration.weeks(26);
 
     /*
