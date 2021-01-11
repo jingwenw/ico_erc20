@@ -35,14 +35,18 @@ module.exports = async function(callback) {
     console.log("  Crowdsale closing time: " + clt.toUTCString() + " ", npmClosingTime);
     console.log("  Crowdsale is open? ", isOpen);
 
-    if (isOpen && isPaused) {
-	console.log("  Crowdsale has started ...");
+	// prepare for the crowdsale
+    if (!isPaused && !isOpen) {
+	console.log("Now to prepare the ICO ... ");
+	let deployer = await npmToken.owner();
+	console.log("  The deployer or owner: " + deployer);
+	await npmToken.pause();
+	await npmToken.transferOwnership(npmCrowdsale.address);
 
-	let raised = await npmCrowdsale.weiRaised();
-	let eth = raised / 10 ** 18;
-	console.log("     So far wei raised: " + raised + " Or eth: " + eth);
-    } 
-    
+	await npmToken.addMinter(npmCrowdsale.address, { from: deployer });
+        await npmToken.addPauser(npmCrowdsale.address, { from: deployer });
+    } else {
+	console.log("  Already paused or in open status, so no action taken.");
+    }
     console.log("========== Done Checking ========");
-    return true;
 }

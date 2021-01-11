@@ -1,3 +1,9 @@
+/**
+ * NPM Coin, based on ERC20
+ *    
+ *    by James W.
+ *
+ */
 pragma solidity >=0.4.25 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";

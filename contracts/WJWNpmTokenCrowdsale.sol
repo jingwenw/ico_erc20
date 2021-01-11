@@ -75,7 +75,6 @@ contract WJWNpmTokenCrowdsale is Crowdsale, MintedCrowdsale, CappedCrowdsale, Ti
     myToken        = _token;
     myRatePreICO   = _rate;
     myRateICO	   = _rate / 2;
- //   myToken.pause();
   }
 
   /**
